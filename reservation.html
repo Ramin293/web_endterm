@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Reserve a table at OrbitFood, a seasonal restaurant website made for the Web Technologies I midterm.">
+    <title>Reserve a table | OrbitFood</title>
+    <link rel="stylesheet" href="bootstrap/bootstrap.css">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <a class="skip-link" href="#main">Skip to content</a>
+    <header class="header">
+        <nav class="container navigation" aria-label="Main navigation">
+            <a class="logo" href="index.html">OrbitFood<span>.</span></a>
+            <ul class="nav-list">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="menu.html">Menu</a></li>
+                <li><a href="reservation.html" class="active" aria-current="page">Reserve</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="order.html">Order</a></li>
+            </ul>
+            <a class="btn btn-dark" href="reservation.html">Book a table</a>
+        </nav>
+    </header>
+
+    <main id="main">
+        <div class="container">
+            <header class="page-top">
+                <p class="eyebrow">Make yourself at home</p>
+                <h1>Reserve a table</h1>
+                <p>Choose a date and bring your favourite people.</p>
+            </header>
+            <div class="page-content row g-4">
+                <div class="col-lg-8">
+                    <section class="panel">
+                        <h2>Your reservation</h2>
+                        <p class="mb-4">All fields are required, except the note.</p>
+                        <form action="reservation-result.html" method="get">
+                            <div class="row g-3">
+                                <div class="col-md-6">
+                                    <label class="form-label" for="date">Date</label>
+                                    <input class="form-control" type="date" id="date" name="date" required>
+                                </div>
+                                <div class="col-md-6">
+                                    <label class="form-label" for="time">Time</label>
+                                    <select class="form-select" id="time" name="time" required>
+                                        <option value="">Choose a time</option>
+                                        <option>11:30</option>
+                                        <option>13:00</option>
+                                        <option>14:30</option>
+                                        <option>16:00</option>
+                                        <option>17:30</option>
+                                        <option>19:00</option>
+                                        <option>20:30</option>
+                                        <option>21:30</option>
+                                    </select>
+                                </div>
+                                <div class="col-md-6">
+                                    <label class="form-label" for="guests">Guests</label>
+                                    <select class="form-select" id="guests" name="guests" required>
+                                        <option value="">Number of guests</option>
+                                        <option value="1">1 guest</option>
+                                        <option value="2">2 guests</option>
+                                        <option value="3">3 guests</option>
+                                        <option value="4">4 guests</option>
+                                        <option value="5">5 guests</option>
+                                        <option value="6">6 guests</option>
+                                    </select>
+                                </div>
+                                <div class="col-md-6">
+                                    <label class="form-label" for="name">Name</label>
+                                    <input class="form-control" type="text" id="name" name="name" placeholder="Your name" minlength="2" maxlength="60" required>
+                                </div>
+                                <div class="col-12">
+                                    <label class="form-label" for="note">A note for our team <span class="fw-normal">(optional)</span></label>
+                                    <textarea class="form-control" id="note" name="note" rows="3" maxlength="300" placeholder="Dietary needs or a special occasion"></textarea>
+                                </div>
+                            </div>
+                            <button class="btn btn-dark w-100 mt-4" type="submit">Continue reservation &rarr;</button>
+                            <p class="small-note">Student demo: try the form with sample details. This does not reserve a real table.</p>
+                        </form>
+                    </section>
+                </div>
+                <aside class="col-lg-4">
+                    <div class="panel side-panel">
+                        <p class="eyebrow">Before your visit</p>
+                        <h2>Good to know</h2>
+                        <h3>Opening hours</h3>
+                        <p>Monday to Sunday<br>11:30&ndash;23:00</p>
+                        <h3>A little extra time</h3>
+                        <p>Tables are held for 15 minutes. Let the team know if you are running late.</p>
+                        <h3>Coming as a group?</h3>
+                        <p>The form is for groups of up to 6. For larger gatherings, speak to our team.</p>
+                        <h3>Dietary needs</h3>
+                        <p>Add a note about allergies or preferences so the team knows what to discuss with you.</p>
+                        <a class="btn btn-outline-dark w-100 mt-3" href="about.html#location">Location &amp; hours</a>
+                    </div>
+                </aside>
+            </div>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <div class="container footer-content">
+            <p>14 Green Street, Astana <span aria-hidden="true">&middot;</span> Open daily 11:30&ndash;23:00</p>
+            <a href="about.html#location">Find us</a>
+            <p>&copy; 2026 OrbitFood. Student project.</p>
+        </div>
+    </footer>
+</body>
+</html>

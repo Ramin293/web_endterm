@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Roasted pumpkin risotto at OrbitFood, a seasonal restaurant website made for the Web Technologies I midterm.">
+    <title>Roasted pumpkin risotto | OrbitFood</title>
+    <link rel="stylesheet" href="bootstrap/bootstrap.css">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <a class="skip-link" href="#main">Skip to content</a>
+    <header class="header">
+        <nav class="container navigation" aria-label="Main navigation">
+            <a class="logo" href="index.html">OrbitFood<span>.</span></a>
+            <ul class="nav-list">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="menu.html" class="active">Menu</a></li>
+                <li><a href="reservation.html">Reserve</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="order.html">Order</a></li>
+            </ul>
+            <a class="btn btn-dark" href="reservation.html">Book a table</a>
+        </nav>
+    </header>
+
+    <main id="main">
+        <div class="container">
+            <header class="page-top">
+                <nav aria-label="Breadcrumb">
+                    <ol class="crumbs">
+                    <li><a href="menu.html">Menu</a></li>
+                        <li aria-hidden="true">/</li>
+                        <li aria-current="page">Dish details</li>
+                    </ol>
+                </nav>
+                <h1>Roasted pumpkin risotto</h1>
+            </header>
+            <div class="page-content">
+                <div class="row g-4 align-items-stretch">
+                    <div class="col-md-6">
+                        <img class="page-photo" src="images/risotto.jpg" alt="Creamy risotto with herbs and a parmesan crisp on a white plate" width="700" height="500">
+                    </div>
+                    <div class="col-md-6">
+                        <section class="panel">
+                            <p class="eyebrow">A seasonal favourite</p>
+                            <h2>Comfort in every spoonful.</h2>
+                            <p class="price mb-3">$18</p>
+                            <p>Creamy arborio rice, sweet roasted pumpkin, sage and parmesan. Slowly cooked and served warm, just the way we like it.</p>
+                            <span class="tag">Vegetarian option</span>
+                            <span class="tag">Contains dairy</span>
+                            <div class="buttons">
+                                <a class="btn btn-dark" href="order.html#risotto-choice">Add to order &rarr;</a>
+                            </div>
+                        </section>
+                    </div>
+                </div>
+                <section class="panel mt-4">
+                    <h2>About this dish</h2>
+                    <p>Our take on a comforting classic, with a little sweetness from the pumpkin and the earthy flavour of fresh sage.</p>
+                    <ul class="details-list mb-3">
+                        <li>Arborio rice and vegetable stock</li>
+                        <li>Roasted pumpkin and fresh sage</li>
+                        <li>Butter and parmesan-style cheese</li>
+                    </ul>
+                    <p class="mb-0">Ask the team about vegetarian cheese, gluten-free preparation and any dietary requirements.</p>
+                </section>
+            </div>
+            <section class="section">
+                <div class="section-head">
+                    <h2>You may also like</h2>
+                    <a class="text-link" href="menu.html">Back to the menu &rarr;</a>
+                </div>
+                <div class="food-grid">
+                    <article class="food-card" id="fish">
+                        <img src="images/fish.jpg" alt="Sea bass with roasted vegetables on a grey plate" width="600" height="400" loading="lazy">
+                        <div class="food-info">
+                            <h3><a href="menu.html#fish">Charred sea bass</a></h3>
+                            <p>Roasted vegetables, fresh herbs and a crisp golden skin.</p>
+                            <div class="food-bottom">
+                                <span class="price">$26</span>
+                                <a class="text-link" href="order.html#fish-choice">Order dish &rarr;</a>
+                            </div>
+                        </div>
+                    </article>
+                    <article class="food-card" id="toast">
+                        <img src="images/toast.jpg" alt="Toast topped with golden mushrooms and herbs" width="600" height="400" loading="lazy">
+                        <div class="food-info">
+                            <h3><a href="menu.html#toast">Wild mushroom toast</a></h3>
+                            <p>Sourdough, thyme and a generous serving of mushrooms.</p>
+                            <div class="food-bottom">
+                                <span class="price">$14</span>
+                                <a class="text-link" href="order.html#toast-choice">Order dish &rarr;</a>
+                            </div>
+                        </div>
+                    </article>
+                    <article class="food-card" id="tart">
+                        <img src="images/tart.jpg" alt="Fruit tart served with sliced pear and fresh mint" width="600" height="400" loading="lazy">
+                        <div class="food-info">
+                            <h3><a href="menu.html#tart">Pear &amp; almond tart</a></h3>
+                            <p>Pear, almond cream and a buttery pastry crust.</p>
+                            <div class="food-bottom">
+                                <span class="price">$10</span>
+                                <a class="text-link" href="order.html#tart-choice">Order dish &rarr;</a>
+                            </div>
+                        </div>
+                    </article>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <div class="container footer-content">
+            <p>14 Green Street, Astana <span aria-hidden="true">&middot;</span> Open daily 11:30&ndash;23:00</p>
+            <a href="about.html#location">Find us</a>
+            <p>&copy; 2026 OrbitFood. Student project.</p>
+        </div>
+    </footer>
+</body>
+</html>

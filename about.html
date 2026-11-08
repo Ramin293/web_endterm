@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Our story and location at OrbitFood, a seasonal restaurant website made for the Web Technologies I midterm.">
+    <title>Our story and location | OrbitFood</title>
+    <link rel="stylesheet" href="bootstrap/bootstrap.css">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <a class="skip-link" href="#main">Skip to content</a>
+    <header class="header">
+        <nav class="container navigation" aria-label="Main navigation">
+            <a class="logo" href="index.html">OrbitFood<span>.</span></a>
+            <ul class="nav-list">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="menu.html">Menu</a></li>
+                <li><a href="reservation.html">Reserve</a></li>
+                <li><a href="about.html" class="active" aria-current="page">About</a></li>
+                <li><a href="order.html">Order</a></li>
+            </ul>
+            <a class="btn btn-dark" href="reservation.html">Book a table</a>
+        </nav>
+    </header>
+
+    <main id="main">
+        <div class="container">
+            <header class="page-top">
+                <p class="eyebrow">A place to come together</p>
+                <h1>Our story &amp; location</h1>
+                <p>Come for the menu. Stay for the feeling.</p>
+            </header>
+            <section class="page-content row g-4 align-items-stretch" aria-labelledby="story-title">
+                <div class="col-md-6">
+                    <img class="page-photo" src="images/table.jpg" alt="An inviting restaurant table set for dinner" width="700" height="500">
+                </div>
+                <div class="col-md-6">
+                    <div class="panel">
+                        <p class="eyebrow">The idea behind OrbitFood</p>
+                        <h2 id="story-title">A neighbourhood table</h2>
+                        <p>OrbitFood started with a simple idea: make seasonal cooking feel generous, relaxed, and worth sharing.</p>
+                        <p>Our kitchen follows the local market and our dining room follows the rhythm of the people in it. A quick lunch, a long dinner, or something to take home &mdash; there is room for all of it.</p>
+                        <a class="text-link" href="#team">Meet the team &rarr;</a>
+                    </div>
+                </div>
+            </section>
+            <section class="section" id="location">
+                <div class="section-head">
+                    <div>
+                        <p class="eyebrow">Stop by sometime</p>
+                        <h2>Find us</h2>
+                    </div>
+                </div>
+                <div class="row g-4">
+                    <div class="col-md-6">
+                        <div class="panel">
+                            <h3 class="mb-3">Opening hours</h3>
+                            <div class="table-responsive">
+                                <table class="table hours">
+                                    <caption>A table for lunch or dinner, every day.</caption>
+                                    <thead>
+                                        <tr>
+                                            <th scope="col">Day</th>
+                                            <th scope="col">Opens</th>
+                                            <th scope="col">Closes</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <th scope="row">Monday&ndash;Friday</th>
+                                            <td>11:30</td>
+                                            <td>23:00</td>
+                                        </tr>
+                                        <tr>
+                                            <th scope="row">Saturday</th>
+                                            <td>11:30</td>
+                                            <td>23:00</td>
+                                        </tr>
+                                        <tr>
+                                            <th scope="row">Sunday</th>
+                                            <td>11:30</td>
+                                            <td>23:00</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <a class="text-link d-inline-block mt-4" href="reservation.html">Plan your visit &rarr;</a>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="location">
+                            <p class="eyebrow">Astana, Kazakhstan</p>
+                            <h3>OrbitFood</h3>
+                            <address>14 Green Street<br>Astana, Kazakhstan</address>
+                            <a class="btn btn-outline-dark" href="https://www.google.com/maps/search/?api=1&amp;query=Astana%2C%20Kazakhstan" target="_blank" rel="noopener noreferrer">View Astana on Maps &nearr;</a>
+                            <p class="small-note">OrbitFood and this address are fictional. The map opens the city used in our project.</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <section class="section" id="team">
+                <div class="section-head">
+                    <div>
+                        <p class="eyebrow">People make the place</p>
+                        <h2>A small team, a shared table</h2>
+                    </div>
+                </div>
+                <div class="row g-4">
+                    <div class="col-md-4">
+                        <h3>In the kitchen</h3>
+                        <p>Our cooks keep the menu short and let seasonal ingredients do the talking.</p>
+                    </div>
+                    <div class="col-md-4">
+                        <h3>In the dining room</h3>
+                        <p>A friendly welcome, a little help choosing, and time to enjoy your meal.</p>
+                    </div>
+                    <div class="col-md-4">
+                        <h3>Behind the idea</h3>
+                        <p>Good food should feel comfortable. That is the thought behind every page of OrbitFood.</p>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <div class="container footer-content">
+            <p>14 Green Street, Astana <span aria-hidden="true">&middot;</span> Open daily 11:30&ndash;23:00</p>
+            <a href="about.html#location">Find us</a>
+            <p>&copy; 2026 OrbitFood. Student project.</p>
+        </div>
+    </footer>
+</body>
+</html>

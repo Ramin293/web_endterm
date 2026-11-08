@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Order online at OrbitFood, a seasonal restaurant website made for the Web Technologies I midterm.">
+    <title>Order online | OrbitFood</title>
+    <link rel="stylesheet" href="bootstrap/bootstrap.css">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <a class="skip-link" href="#main">Skip to content</a>
+    <header class="header">
+        <nav class="container navigation" aria-label="Main navigation">
+            <a class="logo" href="index.html">OrbitFood<span>.</span></a>
+            <ul class="nav-list">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="menu.html">Menu</a></li>
+                <li><a href="reservation.html">Reserve</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="order.html" class="active" aria-current="page">Order</a></li>
+            </ul>
+            <a class="btn btn-dark" href="reservation.html">Book a table</a>
+        </nav>
+    </header>
+
+    <main id="main">
+        <div class="container">
+            <header class="page-top">
+                <p class="eyebrow">From our kitchen to your table</p>
+                <h1>Order online</h1>
+                <p>Take a little bit of OrbitFood home with you.</p>
+            </header>
+            <div class="page-content">
+                <form action="order-result.html" method="get">
+                    <div class="row g-4">
+                        <div class="col-lg-8">
+                            <fieldset class="order-list">
+                                <legend>Choose your dish</legend>
+                                <p>Select one dish, then choose how many portions you would like.</p>
+                                <div class="order-item" id="toast-choice">
+                                    <img src="images/toast.jpg" alt="Toast topped with golden mushrooms and herbs" width="100" height="100">
+                                    <input type="radio" id="choose-toast" name="dish" value="toast" required>
+                                    <label for="choose-toast">
+                                        <strong>Wild mushroom toast</strong>
+                                        <small>Sourdough, thyme and a generous serving of mushrooms.</small>
+                                        <span class="price">$14</span>
+                                    </label>
+                                </div>
+                                <div class="order-item" id="risotto-choice">
+                                    <img src="images/risotto.jpg" alt="Creamy risotto served on a white plate" width="100" height="100">
+                                    <input type="radio" id="choose-risotto" name="dish" value="risotto" required>
+                                    <label for="choose-risotto">
+                                        <strong>Roasted pumpkin risotto</strong>
+                                        <small>Creamy arborio rice, roasted pumpkin, sage and parmesan.</small>
+                                        <span class="price">$18</span>
+                                    </label>
+                                </div>
+                                <div class="order-item" id="fish-choice">
+                                    <img src="images/fish.jpg" alt="Sea bass with roasted vegetables on a grey plate" width="100" height="100">
+                                    <input type="radio" id="choose-fish" name="dish" value="fish" required>
+                                    <label for="choose-fish">
+                                        <strong>Charred sea bass</strong>
+                                        <small>Roasted vegetables, fresh herbs and a crisp golden skin.</small>
+                                        <span class="price">$26</span>
+                                    </label>
+                                </div>
+                                <div class="order-item" id="tart-choice">
+                                    <img src="images/tart.jpg" alt="Fruit tart served with sliced pear and fresh mint" width="100" height="100">
+                                    <input type="radio" id="choose-tart" name="dish" value="tart" required>
+                                    <label for="choose-tart">
+                                        <strong>Pear &amp; almond tart</strong>
+                                        <small>Pear, almond cream and a buttery pastry crust.</small>
+                                        <span class="price">$10</span>
+                                    </label>
+                                </div>
+                            </fieldset>
+                            <a class="text-link d-inline-block mt-3" href="menu.html">Explore the full menu &rarr;</a>
+                        </div>
+                        <aside class="col-lg-4">
+                            <div class="panel side-panel">
+                                <h2>Your order</h2>
+                                <p>One dish, freshly prepared for pickup.</p>
+                                <div class="mb-3">
+                                    <label class="form-label" for="quantity">Portions</label>
+                                    <input class="form-control" type="number" id="quantity" name="quantity" min="1" max="6" value="1" required>
+                                </div>
+                                <div class="mb-3">
+                                    <label class="form-label" for="pickup">Pickup time</label>
+                                    <select class="form-select" id="pickup" name="pickup" required>
+                                        <option value="">Choose a time</option>
+                                        <option>12:00</option>
+                                        <option>13:30</option>
+                                        <option>15:00</option>
+                                        <option>17:00</option>
+                                        <option>18:30</option>
+                                        <option>20:00</option>
+                                        <option>21:30</option>
+                                    </select>
+                                </div>
+                                <p class="small-note mb-4">Prices are per portion. Pickup from OrbitFood, 14 Green Street.</p>
+                                <button class="btn btn-dark w-100" type="submit">Continue order &rarr;</button>
+                                <p class="small-note">Student demo: no payment is taken and no real order is placed.</p>
+                            </div>
+                        </aside>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <div class="container footer-content">
+            <p>14 Green Street, Astana <span aria-hidden="true">&middot;</span> Open daily 11:30&ndash;23:00</p>
+            <a href="about.html#location">Find us</a>
+            <p>&copy; 2026 OrbitFood. Student project.</p>
+        </div>
+    </footer>
+</body>
+</html>

@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Our menu at OrbitFood, a seasonal restaurant website made for the Web Technologies I midterm.">
+    <title>Our menu | OrbitFood</title>
+    <link rel="stylesheet" href="bootstrap/bootstrap.css">
+    <link rel="stylesheet" href="css/style.css">
+    <script src="js/menu-data.js" defer></script>
+    <script src="js/menu.js" defer></script>
+</head>
+<body>
+    <a class="skip-link" href="#main">Skip to content</a>
+    <header class="header">
+        <nav class="container navigation" aria-label="Main navigation">
+            <a class="logo" href="index.html">OrbitFood<span>.</span></a>
+            <ul class="nav-list">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="menu.html" class="active" aria-current="page">Menu</a></li>
+                <li><a href="reservation.html">Reserve</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="order.html">Order</a></li>
+            </ul>
+            <a class="btn btn-dark" href="reservation.html">Book a table</a>
+        </nav>
+    </header>
+
+    <main id="main">
+        <div class="container">
+            <header class="page-top">
+                <p class="eyebrow">Fresh from the kitchen</p>
+                <h1>Simple food. Full of flavour.</h1>
+                <p>Seasonal ingredients, a few familiar favourites, and something sweet to finish.</p>
+            </header>
+            <section class="panel menu-tools" aria-label="Find a dish" hidden>
+                <div class="row g-3">
+                    <div class="col-md-6">
+                        <label class="form-label" for="menu-search">Search dishes or ingredients</label>
+                        <input class="form-control" type="search" id="menu-search" placeholder="Try pumpkin or thyme">
+                    </div>
+                    <div class="col-md-6">
+                        <label class="form-label" for="menu-sort">Sort dishes within each category</label>
+                        <select class="form-select" id="menu-sort">
+                            <option value="default">Kitchen order</option>
+                            <option value="price-asc">Price: low to high</option>
+                            <option value="price-desc">Price: high to low</option>
+                            <option value="name">Name: A to Z</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="category-links" id="menu-categories" role="group" aria-label="Filter by category"></div>
+                <div class="menu-actions">
+                    <label><input type="checkbox" id="favorites-only"> Show favorites only (<span id="favorites-count">0</span>)</label>
+                    <button class="btn btn-outline-dark" id="reset-menu" type="button">Reset filters</button>
+                    <button class="btn btn-outline-dark" id="clear-favorites" type="button">Clear favorites</button>
+                </div>
+                <p id="menu-status" role="status" aria-live="polite" class="small-note"></p>
+                <p id="storage-status" class="small-note" hidden></p>
+            </section>
+            <div class="page-content">
+                <noscript><p>The interactive menu needs JavaScript. Browse all dishes and prices on the <a href="order.html">order page</a>.</p></noscript>
+                <div id="menu-results"></div>
+                <p class="small-note">Prices are in USD, as shown in our original wireframes. Please ask about ingredients before ordering.</p>
+            </div>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <div class="container footer-content">
+            <p>14 Green Street, Astana <span aria-hidden="true">&middot;</span> Open daily 11:30&ndash;23:00</p>
+            <a href="about.html#location">Find us</a>
+            <p>&copy; 2026 OrbitFood. Student project.</p>
+        </div>
+    </footer>
+</body>
+</html>
