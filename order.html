@@ -7,6 +7,8 @@
     <title>Order online | OrbitFood</title>
     <link rel="stylesheet" href="bootstrap/bootstrap.css">
     <link rel="stylesheet" href="css/style.css">
+    <script src="js/menu-data.js" defer></script>
+    <script src="js/forms.js" defer></script>
 </head>
 <body>
     <a class="skip-link" href="#main">Skip to content</a>
@@ -32,7 +34,7 @@
                 <p>Take a little bit of OrbitFood home with you.</p>
             </header>
             <div class="page-content">
-                <form action="order-result.html" method="get">
+                <form id="order-form" action="order-result.html" method="get">
                     <div class="row g-4">
                         <div class="col-lg-8">
                             <fieldset class="order-list">
@@ -40,7 +42,7 @@
                                 <p>Select one dish, then choose how many portions you would like.</p>
                                 <div class="order-item" id="toast-choice">
                                     <img src="images/toast.jpg" alt="Toast topped with golden mushrooms and herbs" width="100" height="100">
-                                    <input type="radio" id="choose-toast" name="dish" value="toast" required>
+                                    <input type="radio" id="choose-toast" name="dish" value="toast" required aria-describedby="dish-error">
                                     <label for="choose-toast">
                                         <strong>Wild mushroom toast</strong>
                                         <small>Sourdough, thyme and a generous serving of mushrooms.</small>
@@ -49,7 +51,7 @@
                                 </div>
                                 <div class="order-item" id="risotto-choice">
                                     <img src="images/risotto.jpg" alt="Creamy risotto served on a white plate" width="100" height="100">
-                                    <input type="radio" id="choose-risotto" name="dish" value="risotto" required>
+                                    <input type="radio" id="choose-risotto" name="dish" value="risotto" required aria-describedby="dish-error">
                                     <label for="choose-risotto">
                                         <strong>Roasted pumpkin risotto</strong>
                                         <small>Creamy arborio rice, roasted pumpkin, sage and parmesan.</small>
@@ -58,7 +60,7 @@
                                 </div>
                                 <div class="order-item" id="fish-choice">
                                     <img src="images/fish.jpg" alt="Sea bass with roasted vegetables on a grey plate" width="100" height="100">
-                                    <input type="radio" id="choose-fish" name="dish" value="fish" required>
+                                    <input type="radio" id="choose-fish" name="dish" value="fish" required aria-describedby="dish-error">
                                     <label for="choose-fish">
                                         <strong>Charred sea bass</strong>
                                         <small>Roasted vegetables, fresh herbs and a crisp golden skin.</small>
@@ -67,13 +69,14 @@
                                 </div>
                                 <div class="order-item" id="tart-choice">
                                     <img src="images/tart.jpg" alt="Fruit tart served with sliced pear and fresh mint" width="100" height="100">
-                                    <input type="radio" id="choose-tart" name="dish" value="tart" required>
+                                    <input type="radio" id="choose-tart" name="dish" value="tart" required aria-describedby="dish-error">
                                     <label for="choose-tart">
                                         <strong>Pear &amp; almond tart</strong>
                                         <small>Pear, almond cream and a buttery pastry crust.</small>
                                         <span class="price">$10</span>
                                     </label>
                                 </div>
+                                <p class="text-danger small mt-2 mb-0" id="dish-error" hidden></p>
                             </fieldset>
                             <a class="text-link d-inline-block mt-3" href="menu.html">Explore the full menu &rarr;</a>
                         </div>
@@ -83,11 +86,12 @@
                                 <p>One dish, freshly prepared for pickup.</p>
                                 <div class="mb-3">
                                     <label class="form-label" for="quantity">Portions</label>
-                                    <input class="form-control" type="number" id="quantity" name="quantity" min="1" max="6" value="1" required>
+                                    <input class="form-control" type="number" id="quantity" min="1" max="6" value="1" required aria-describedby="quantity-error">
+                                    <p class="text-danger small mt-1 mb-0" id="quantity-error" hidden></p>
                                 </div>
                                 <div class="mb-3">
                                     <label class="form-label" for="pickup">Pickup time</label>
-                                    <select class="form-select" id="pickup" name="pickup" required>
+                                    <select class="form-select" id="pickup" required aria-describedby="pickup-error">
                                         <option value="">Choose a time</option>
                                         <option>12:00</option>
                                         <option>13:30</option>
@@ -97,9 +101,12 @@
                                         <option>20:00</option>
                                         <option>21:30</option>
                                     </select>
+                                    <p class="text-danger small mt-1 mb-0" id="pickup-error" hidden></p>
                                 </div>
+                                <p class="fw-bold" id="order-total" role="status" hidden></p>
                                 <p class="small-note mb-4">Prices are per portion. Pickup from OrbitFood, 14 Green Street.</p>
                                 <button class="btn btn-dark w-100" type="submit">Continue order &rarr;</button>
+                                <p class="alert alert-success form-success mt-3 mb-0" tabindex="-1" hidden>Order details passed validation. This is a demo and no order was placed.</p>
                                 <p class="small-note">Student demo: no payment is taken and no real order is placed.</p>
                             </div>
                         </aside>
