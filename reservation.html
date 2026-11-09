@@ -8,6 +8,8 @@
     <link rel="stylesheet" href="bootstrap/bootstrap.css">
     <link rel="stylesheet" href="css/style.css">
     <script src="js/forms.js" defer></script>
+    <script src="jquery/jquery-3.7.1.min.js" defer></script>
+    <script src="js/enhancements.js" defer></script>
 </head>
 <body>
     <a class="skip-link" href="#main">Skip to content</a>
@@ -79,7 +81,8 @@
                                 </div>
                                 <div class="col-12">
                                     <label class="form-label" for="note">A note for our team <span class="fw-normal">(optional)</span></label>
-                                    <textarea class="form-control" id="note" rows="3" maxlength="300" placeholder="Dietary needs or a special occasion" aria-describedby="note-error"></textarea>
+                                    <textarea class="form-control" id="note" rows="3" maxlength="300" placeholder="Dietary needs or a special occasion" aria-describedby="note-help note-error"></textarea>
+                                    <p class="small mt-1 mb-0" id="note-help">For example, mention a nut allergy or ask for a high chair. Use up to 300 characters.</p>
                                     <p class="text-danger small mt-1 mb-0" id="note-error" hidden></p>
                                 </div>
                             </div>
