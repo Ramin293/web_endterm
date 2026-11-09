@@ -15,15 +15,15 @@ The layout is based on our [Figma wireframes](https://www.figma.com/design/33Djx
 - About: the restaurant story, opening hours, location and team.
 - Order: choose one dish, the number of portions and a pickup time.
 
-There are also two simple result pages for the reservation and order forms. The same navigation and footer are used throughout the site.
+There are also two informational pages for the reservation and order demos. The same navigation and footer are used throughout the site.
 
 ## How to open it
 
-Download the project and open `index.html` in a browser. No installation or build command is needed. Bootstrap and the photographs are stored locally, so the pages also work without an internet connection. The external Figma and map links need internet access.
+Download the project and open `index.html` in a browser. No installation or build command is needed. Bootstrap, jQuery and the photographs are stored locally, so the pages work without an internet connection. The external Figma and map links need internet access. For reliable favorites storage across pages, use the published website or serve the project over local HTTP.
 
 ## What we used
 
-The site uses HTML, CSS, Bootstrap 5.3.8 and external vanilla JavaScript. Endterm part 1 adds the interactive menu; form validation and jQuery remain assigned to part 2. There is no backend.
+The site uses HTML, CSS, Bootstrap 5.3.8, vanilla JavaScript and jQuery 3.7.1. The endterm adds an interactive menu, custom form validation, an order estimate and jQuery interactions. There is no backend.
 
 - Semantic HTML for the header, navigation, main content, sections, articles, forms and footer.
 - Flexbox for the navigation, buttons and order rows.
@@ -33,17 +33,17 @@ The site uses HTML, CSS, Bootstrap 5.3.8 and external vanilla JavaScript. Endter
 - Bootstrap spacing, text, button and form classes.
 - Media queries at 991px and 767px for tablet and phone layouts.
 - An HTML table for opening hours on the About page.
-- Labels and basic HTML validation for the forms.
+- Accessible field labels and JavaScript validation with field-specific feedback.
 
-All custom styles are in `css/style.css`. The original Bootstrap licence is in `bootstrap/LICENSE`.
+All custom styles are in `css/style.css`. Vendor licences are in `bootstrap/LICENSE` and `jquery/LICENSE.txt`.
 
 ## About the forms
 
-This is a fictional restaurant and a static student project. The forms check required fields using the browser and open a demo result page. They do not check table availability, send bookings, accept payments or save orders.
+This is a fictional restaurant and a static student project. With JavaScript enabled, each form validates on the same page and displays a demo success message. It focuses the first invalid field and updates feedback as values are corrected. Without JavaScript, native HTML validation leads to an informational page.
 
-The order form supports one dish with 1 to 6 portions. It does not calculate a live total or keep a shopping cart. The Menu page now supports category filtering, ingredient search, sorting and favorites. Existing category and dish anchors remain available when their items are visible.
+Both forms use Astana date and time and reject past slots. The order form estimates the cost of one dish with 1 to 6 portions using prices from the shared menu array.
 
-Forms use GET, so the entered values appear in the result page URL. Use sample details when testing. The address is fictional, and the map link opens Astana. Prices are shown in USD to match the wireframes. The photographs illustrate the menu and restaurant concept.
+Use sample details when testing. The forms do not send bookings, accept payments or save orders. The address is fictional, and the map link opens Astana. Prices are shown in USD to match the wireframes.
 
 ## GitHub Pages
 
@@ -67,10 +67,10 @@ Open each page and try the navigation and forms. Resize the browser to check the
 
 ## Endterm team and work split
 
-There are two contributors. The repository does not state both students' full names: replace the role labels below with your real names before submission. Detailed responsibilities and acceptance checks are in [ENDTERM_PLAN.md](ENDTERM_PLAN.md).
+The contributors are identified here by their GitHub accounts. Detailed responsibilities and acceptance checks are in [ENDTERM_PLAN.md](ENDTERM_PLAN.md).
 
-- Ramin293 (you): interactive menu, JavaScript data and functions, DOM manipulation, events, favorites, documentation. Implemented in this commit.
-- Student 2 (partner): custom reservation/order validation, jQuery interactions, final deployment verification and shared defence preparation. Pending.
+- [Ramin293](https://github.com/Ramin293): interactive menu, shared dish data, DOM manipulation, menu events and favorites.
+- [arnur-kozhabergen](https://github.com/arnur-kozhabergen): reservation and order validation, live order estimate, jQuery interactions and endterm documentation.
 
 ## New interactive menu
 
@@ -87,7 +87,15 @@ Open `menu.html` with JavaScript enabled. No packages or build step are required
 
 `js/menu-data.js` exposes `window.OrbitFood.dishes` and `.categories`. `js/menu.js` renders cards using DOM methods and textContent, handles events, and stores only favorite dish IDs under `orbitfood.favorites.v1`. No personal details are stored. Both scripts are deferred; load the data script first.
 
-Part 1 does not complete the endterm: the substantial form validation, jQuery requirements and final published-version checks are still pending.
+## How to test forms and jQuery
+
+1. Open Reserve and submit with empty fields. Check that individual errors appear and keyboard focus moves to the date field. Try a date in the past, a time that already passed today in Astana and a name containing only spaces.
+2. Enter a future date, a listed time, 2 guests and a sample name. Submit again and check the demo success message. Change a field and check that the old success message clears.
+3. Open Order and try submitting without a dish or pickup slot. Select the $18 risotto and enter 2 portions. The total should be $36. Try 0, 7 or a fractional quantity, then restore a valid quantity and submit with a future pickup date and time.
+4. Open About. Click a FAQ question or use Enter to reveal its answer. Activate the same question again to close it. On Reserve, use Tab to focus the optional note and then move away. The example should fade in and out.
+5. Open both result pages directly. They should display information about the demos. Repeat the main interactions on a phone-width screen.
+
+`js/forms.js` uses native event listeners and `preventDefault()`. `js/enhancements.js` uses ID and class selectors, `closest()` and `find()`, and jQuery slide and fade effects.
 
 ## Repository migration
 
