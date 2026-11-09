@@ -35,8 +35,23 @@ function validPortions(value) {
     return Number.isInteger(number) && number >= 1 && number <= 6;
 }
 
+function scheduleErrors(date, time) {
+    const now = astanaDateAndTime();
+    date.min = now.date;
+    const dateError = date.valueAsNumber >= Date.parse(now.date) ? "" : "Choose today or a future date.";
+    let timeError = "";
+
+    if (!hasSelectedOption(time)) {
+        timeError = "Choose a time from the list.";
+    } else if (date.value === now.date && time.value <= now.time) {
+        timeError = "Choose a time later than the current time in Astana.";
+    }
+    return { dateError, timeError };
+}
+
 function setupValidation(form, checkFields) {
     const success = form.querySelector(".form-success");
+    const alert = form.querySelector(".form-alert");
     let submitted = false;
     form.noValidate = true;
 
@@ -51,7 +66,7 @@ function setupValidation(form, checkFields) {
                 if (message) field.setAttribute("aria-invalid", "true");
                 else field.removeAttribute("aria-invalid");
             }
-            if (message && !firstInvalid) firstInvalid = fields[0];
+            if (message && !firstInvalid) firstInvalid = { field: fields[0], message };
         }
         return firstInvalid;
     }
@@ -62,7 +77,8 @@ function setupValidation(form, checkFields) {
         success.hidden = true;
         const firstInvalid = validate();
         if (firstInvalid) {
-            firstInvalid.focus();
+            alert.textContent = firstInvalid.message;
+            firstInvalid.field.focus();
             return;
         }
         success.hidden = false;
@@ -71,6 +87,7 @@ function setupValidation(form, checkFields) {
 
     form.addEventListener("input", function () {
         success.hidden = true;
+        alert.textContent = "";
         if (submitted) validate();
     });
 }
@@ -84,20 +101,11 @@ if (reservationForm) {
     date.min = astanaDateAndTime().date;
 
     setupValidation(reservationForm, function () {
-        const now = astanaDateAndTime();
+        const { dateError, timeError } = scheduleErrors(date, time);
         const nameLength = name.value.trim().length;
-        const validDate = date.valueAsNumber >= Date.parse(now.date);
-        date.min = now.date;
-        let timeError = "";
-
-        if (!hasSelectedOption(time)) {
-            timeError = "Choose a reservation time.";
-        } else if (date.value === now.date && time.value <= now.time) {
-            timeError = "Choose a time later than the current time in Astana.";
-        }
 
         return [
-            [[date], "date-error", validDate ? "" : "Choose today or a future date."],
+            [[date], "date-error", dateError],
             [[time], "time-error", timeError],
             [[guests], "guests-error", validPortions(guests.value) ? "" : "Choose 1 to 6 guests."],
             [[name], "name-error", nameLength >= 2 && nameLength <= 60 ? "" : "Enter a name with 2 to 60 characters."],
@@ -109,8 +117,11 @@ if (reservationForm) {
 if (orderForm) {
     const radios = orderForm.querySelectorAll('input[name="dish"]');
     const quantity = document.getElementById("quantity");
+    const pickupDate = document.getElementById("pickup-date");
     const pickup = document.getElementById("pickup");
     const total = document.getElementById("order-total");
+    pickupDate.min = astanaDateAndTime().date;
+    if (!pickupDate.value) pickupDate.value = pickupDate.min;
 
     function selectedDish() {
         const selected = orderForm.querySelector('input[name="dish"]:checked');
@@ -127,10 +138,12 @@ if (orderForm) {
     }
 
     setupValidation(orderForm, function () {
+        const { dateError, timeError } = scheduleErrors(pickupDate, pickup);
         return [
             [radios, "dish-error", selectedDish() ? "" : "Select a dish from the list."],
             [[quantity], "quantity-error", validPortions(quantity.value) ? "" : "Enter a whole number from 1 to 6."],
-            [[pickup], "pickup-error", hasSelectedOption(pickup) ? "" : "Choose a pickup time."]
+            [[pickupDate], "pickup-date-error", dateError],
+            [[pickup], "pickup-error", timeError]
         ];
     });
 

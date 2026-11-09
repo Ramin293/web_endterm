@@ -706,6 +706,9 @@ textarea.form-control {
 .favorite-button[aria-pressed="true"] { background: #eeeee4; border-color: #42533b; }
 #menu-results { padding-top: 8px; }
 [hidden] { display: none !important; }
+.demo-fallback:not(:target) {
+    display: none;
+}
 @media (max-width: 767px) {
     .menu-tools { padding: 20px; }
     .menu-actions { align-items: stretch; flex-direction: column; }

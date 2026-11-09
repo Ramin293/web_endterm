@@ -21,13 +21,13 @@ $(document).ready(function () {
         else answer.slideDown(duration);
     });
 
-    //тут подсказка остается видимой если jQuery не загрузился
-    noteHelp.hide();
+    //тут меняем opacity чтобы кнопка формы не сдвигалась
+    noteHelp.css("opacity", 0);
     $("#note").on("focusin", function () {
-        noteHelp.stop(true, true).fadeIn(reduceMotion.matches ? 0 : 140);
+        noteHelp.stop(true).fadeTo(reduceMotion.matches ? 0 : 140, 1);
     });
     $("#note").on("focusout", function () {
-        noteHelp.stop(true, true).fadeOut(reduceMotion.matches ? 0 : 140);
+        noteHelp.stop(true).fadeTo(reduceMotion.matches ? 0 : 140, 0);
     });
     if ($("#note").is(":focus")) $("#note").trigger("focusin");
 });

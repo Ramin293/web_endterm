@@ -34,7 +34,7 @@
                 <p>Take a little bit of OrbitFood home with you.</p>
             </header>
             <div class="page-content">
-                <form id="order-form" action="order-result.html" method="get">
+                <form id="order-form" action="order-result.html#demo-finished" method="get">
                     <div class="row g-4">
                         <div class="col-lg-8">
                             <fieldset class="order-list">
@@ -90,7 +90,12 @@
                                     <p class="text-danger small mt-1 mb-0" id="quantity-error" hidden></p>
                                 </div>
                                 <div class="mb-3">
-                                    <label class="form-label" for="pickup">Pickup time</label>
+                                    <label class="form-label" for="pickup-date">Pickup date</label>
+                                    <input class="form-control" type="date" id="pickup-date" required aria-describedby="pickup-date-error">
+                                    <p class="text-danger small mt-1 mb-0" id="pickup-date-error" hidden></p>
+                                </div>
+                                <div class="mb-3">
+                                    <label class="form-label" for="pickup">Pickup time in Astana</label>
                                     <select class="form-select" id="pickup" required aria-describedby="pickup-error">
                                         <option value="">Choose a time</option>
                                         <option>12:00</option>
@@ -106,6 +111,7 @@
                                 <p class="fw-bold" id="order-total" role="status" hidden></p>
                                 <p class="small-note mb-4">Prices are per portion. Pickup from OrbitFood, 14 Green Street.</p>
                                 <button class="btn btn-dark w-100" type="submit">Continue order &rarr;</button>
+                                <p class="visually-hidden form-alert" role="alert"></p>
                                 <p class="alert alert-success form-success mt-3 mb-0" tabindex="-1" hidden>Order details passed validation. This is a demo and no order was placed.</p>
                                 <p class="small-note">Student demo: no payment is taken and no real order is placed.</p>
                             </div>

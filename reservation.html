@@ -39,7 +39,7 @@
                     <section class="panel">
                         <h2>Your reservation</h2>
                         <p class="mb-4">All fields are required, except the note.</p>
-                        <form id="reservation-form" action="reservation-result.html" method="get">
+                        <form id="reservation-form" action="reservation-result.html#demo-finished" method="get">
                             <div class="row g-3">
                                 <div class="col-md-6">
                                     <label class="form-label" for="date">Date</label>
@@ -87,6 +87,7 @@
                                 </div>
                             </div>
                             <button class="btn btn-dark w-100 mt-4" type="submit">Continue reservation &rarr;</button>
+                            <p class="visually-hidden form-alert" role="alert"></p>
                             <p class="alert alert-success form-success mt-3 mb-0" tabindex="-1" hidden>Reservation details passed validation. This is a demo and no table was booked.</p>
                             <p class="small-note">Student demo: try the form with sample details. This does not reserve a real table.</p>
                         </form>
