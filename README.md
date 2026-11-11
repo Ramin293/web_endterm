@@ -19,7 +19,7 @@ There are also two informational pages for the reservation and order demos. The 
 
 ## How to open it
 
-Download the project and open `index.html` in a browser. No installation or build command is needed. Bootstrap, jQuery and the photographs are stored locally, so the pages work without an internet connection. The external Figma and map links need internet access. For reliable favorites storage across pages, use the published website or serve the project over local HTTP.
+Download the project and open `index.html` in a browser. No installation or build command is needed. Bootstrap, jQuery and the restaurant photographs are stored locally. Recipe search and the external Figma and map links need internet access. For reliable favorites storage across pages, use the published website or serve the project over local HTTP.
 
 ## What we used
 
@@ -87,7 +87,14 @@ Open `menu.html` with JavaScript enabled. No packages or build step are required
 
 `js/menu-data.js` exposes `window.OrbitFood.dishes` and `.categories`. `js/menu.js` renders cards using DOM methods and textContent, handles events, and stores only favorite dish IDs under `orbitfood.favorites.v1`. No personal details are stored. Both scripts are deferred; load the data script first.
 
+## Chef's inspiration
+
+On the Menu page, select Ingredient and search for `chicken breast`, or select Cuisine and search for `Italian`. The section builds recipe cards from the [TheMealDB API](https://www.themealdb.com/api.php) response. Select a recipe name to open its full instructions on TheMealDB.
+
+Search for `zzzzinvalid` to check the empty state. Disconnect before searching to check the error message, then reconnect and select **Try again** to repeat the same search.
+
 ## How to test forms and jQuery
+
 
 1. Open Reserve and submit with empty fields. Check that individual errors appear and keyboard focus moves to the date field. Try a date in the past, a time that already passed today in Astana and a name containing only spaces.
 2. Enter a future date, a listed time, 2 guests and a sample name. Submit again and check the demo success message. Change a field and check that the old success message clears.
