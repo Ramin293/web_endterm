@@ -89,6 +89,8 @@ Open `menu.html` with JavaScript enabled. No packages or build step are required
 
 ## Chef's inspiration
 
+The recipe search uses `ApiClient.get()` from `js/api-client.js` to send requests, enforce a timeout and parse JSON. The catalog uses `Dish` objects from `js/menu-data.js` to format prices and match search terms. Menu favorites use `StorageService` from `js/storage-service.js` to read and write JSON under the existing favorites key. Malformed saved data starts with an empty list, and blocked storage leaves favorites available for the current visit.
+
 On the Menu page, select Ingredient and search for `chicken breast`, or select Cuisine and search for `Italian`. The section builds recipe cards from the [TheMealDB API](https://www.themealdb.com/api.php) response. Select a recipe name to open its full instructions on TheMealDB.
 
 Search for `zzzzinvalid` to check the empty state. Disconnect before searching to check the error message, then reconnect and select **Try again** to repeat the same search.

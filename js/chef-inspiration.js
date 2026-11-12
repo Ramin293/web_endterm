@@ -9,6 +9,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const status = document.querySelector("#recipe-status");
     const retry = document.querySelector("#recipe-retry");
     const results = document.querySelector("#recipe-results");
+    const api = new ApiClient("https://www.themealdb.com/api/json/v1/1/");
     let lastSearch;
     let loading = false;
 
@@ -49,14 +50,8 @@ document.addEventListener("DOMContentLoaded", () => {
         results.replaceChildren();
         status.textContent = "Searching for recipes…";
 
-        const url = new URL("https://www.themealdb.com/api/json/v1/1/filter.php");
-        url.searchParams.set(search.filter, search.term);
-
         try {
-            const response = await fetch(url, { signal: AbortSignal.timeout(12000) });
-            if (!response.ok) throw new Error("Recipe request failed");
-
-            const data = await response.json();
+            const data = await api.get("filter.php", { [search.filter]: search.term });
             const meals = data.meals === null ? [] : data.meals;
             if (!Array.isArray(meals)) throw new Error("Unexpected recipe data");
 
