@@ -8,6 +8,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const favoritesOnly = document.querySelector("#favorites-only");
     const categoryControls = document.querySelector("#menu-categories");
     const storageKey = "orbitfood.favorites.v1";
+    const storage = new StorageService(storageNotice);
     let activeCategory = "all";
     let favorites = readFavorites();
 
@@ -18,29 +19,17 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     function readFavorites() {
-        try {
-            const saved = JSON.parse(localStorage.getItem(storageKey) || "[]");
-            return Array.isArray(saved) ? [...new Set(saved.filter(id => dishes.some(dish => dish.id === id)))] : [];
-        } catch {
-            storageNotice();
-            return [];
-        }
-    }
-
-    function saveFavorites() {
-        try {
-            localStorage.setItem(storageKey, JSON.stringify(favorites));
-        } catch {
-            storageNotice();
-        }
+        const saved = storage.read(storageKey, []);
+        if (!Array.isArray(saved)) return [];
+        return [...new Set(saved.filter(id => dishes.some(dish => dish.id === id)))];
     }
 
     function getVisibleDishes() {
-        const query = search.value.trim().toLowerCase();
+        const query = search.value;
         const visible = dishes.filter(dish =>
             (activeCategory === "all" || dish.category === activeCategory) &&
             (!favoritesOnly.checked || favorites.includes(dish.id)) &&
-            `${dish.name} ${dish.description}`.toLowerCase().includes(query)
+            dish.matches(query)
         );
         if (sort.value === "price-asc") visible.sort((a, b) => a.price - b.price);
         if (sort.value === "price-desc") visible.sort((a, b) => b.price - a.price);
@@ -70,9 +59,9 @@ document.addEventListener("DOMContentLoaded", () => {
         link.href = dish.href;
         heading.append(link);
         const bottom = createElement("div", "food-bottom");
-        const action = createElement("a", "text-link", dish.id === "risotto" ? "View dish →" : "Order dish →");
-        action.href = dish.href;
-        bottom.append(createElement("span", "price", `$${dish.price}`), action);
+        const action = createElement("a", "text-link", "Order dish →");
+        action.href = dish.orderHref;
+        bottom.append(createElement("span", "price", dish.formatPrice()), action);
         const favorite = createElement("button", "btn btn-outline-dark favorite-button", favorites.includes(dish.id) ? "Remove favorite" : "Save favorite");
         favorite.type = "button";
         favorite.dataset.favorite = dish.id;
@@ -129,7 +118,7 @@ document.addEventListener("DOMContentLoaded", () => {
         const previousButtons = [...results.querySelectorAll("button[data-favorite]")];
         const previousIndex = previousButtons.indexOf(button);
         favorites = favorites.includes(id) ? favorites.filter(value => value !== id) : [...favorites, id];
-        saveFavorites();
+        storage.write(storageKey, favorites);
         renderMenu();
         // Restore keyboard focus after replacing the cards, including removal in favorites view.
         const buttons = [...results.querySelectorAll("button[data-favorite]")];
@@ -148,7 +137,7 @@ document.addEventListener("DOMContentLoaded", () => {
     });
     document.querySelector("#clear-favorites").addEventListener("click", () => {
         favorites = [];
-        saveFavorites();
+        storage.write(storageKey, favorites);
         renderMenu();
     });
     document.querySelector(".menu-tools").hidden = false;

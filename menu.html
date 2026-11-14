@@ -8,7 +8,10 @@
     <link rel="stylesheet" href="bootstrap/bootstrap.css">
     <link rel="stylesheet" href="css/style.css">
     <script src="js/menu-data.js" defer></script>
+    <script src="js/storage-service.js" defer></script>
     <script src="js/menu.js" defer></script>
+    <script src="js/api-client.js" defer></script>
+    <script src="js/chef-inspiration.js" defer></script>
 </head>
 <body>
     <a class="skip-link" href="#main">Skip to content</a>
@@ -32,6 +35,7 @@
                 <p class="eyebrow">Fresh from the kitchen</p>
                 <h1>Simple food. Full of flavour.</h1>
                 <p>Seasonal ingredients, a few familiar favourites, and something sweet to finish.</p>
+                <a class="btn btn-outline-dark" href="#chef-inspiration">Explore world recipes</a>
             </header>
             <section class="panel menu-tools" aria-label="Find a dish" hidden>
                 <div class="row g-3">
@@ -62,6 +66,33 @@
                 <noscript><p>The interactive menu needs JavaScript. Browse all dishes and prices on the <a href="order.html">order page</a>.</p></noscript>
                 <div id="menu-results"></div>
                 <p class="small-note">Prices are in USD, as shown in our original wireframes. Please ask about ingredients before ordering.</p>
+                <section id="chef-inspiration" class="panel mt-4" aria-labelledby="chef-heading">
+                    <h2 id="chef-heading">Chef's inspiration</h2>
+                    <p>Find recipes from around the world by ingredient or cuisine. Data from <a href="https://www.themealdb.com/">TheMealDB</a>.</p>
+                    <noscript><p>Recipe search needs JavaScript.</p></noscript>
+                    <form id="recipe-search" class="row g-3 align-items-end" hidden>
+                        <div class="col-sm-4">
+                            <label class="form-label" for="recipe-filter">Search by</label>
+                            <select class="form-select" id="recipe-filter">
+                                <option value="i">Ingredient</option>
+                                <option value="a">Cuisine</option>
+                            </select>
+                        </div>
+                        <div class="col-sm">
+                            <label class="form-label" for="recipe-query">Ingredient or cuisine in English</label>
+                            <input class="form-control" type="search" id="recipe-query" required maxlength="80" placeholder="Try chicken breast or Italian">
+                        </div>
+                        <div class="col-sm-auto">
+                            <button class="btn btn-dark" type="submit">Find recipes</button>
+                        </div>
+                    </form>
+                    <div class="mt-3" role="status">
+                        <span id="recipe-spinner" class="spinner-border spinner-border-sm me-2" aria-hidden="true" hidden></span>
+                        <span id="recipe-status"></span>
+                    </div>
+                    <button class="btn btn-outline-dark mt-2" type="button" id="recipe-retry" hidden>Try again</button>
+                    <div class="food-grid mt-3" id="recipe-results"></div>
+                </section>
             </div>
         </div>
     </main>

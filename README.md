@@ -8,9 +8,9 @@ The layout is based on our [Figma wireframes](https://www.figma.com/design/33Djx
 
 ## Pages
 
-- Home: introduction and featured dishes.
+- Home: introduction, featured dishes and up to four recently viewed dishes.
 - Menu: starters, mains and desserts.
-- Dish details: pumpkin risotto, ingredients and related dishes.
+- Dish details: name, price, ingredients and related dishes from the shared catalog.
 - Reservation: date, time, guest count and name.
 - About: the restaurant story, opening hours, location and team.
 - Order: choose one dish, the number of portions and a pickup time.
@@ -19,7 +19,7 @@ There are also two informational pages for the reservation and order demos. The 
 
 ## How to open it
 
-Download the project and open `index.html` in a browser. No installation or build command is needed. Bootstrap, jQuery and the photographs are stored locally, so the pages work without an internet connection. The external Figma and map links need internet access. For reliable favorites storage across pages, use the published website or serve the project over local HTTP.
+Download the project and open `index.html` in a browser. No installation or build command is needed. Bootstrap, jQuery and the restaurant photographs are stored locally. Recipe search and the external Figma and map links need internet access. For reliable favorites storage across pages, use the published website or serve the project over local HTTP.
 
 ## What we used
 
@@ -87,7 +87,22 @@ Open `menu.html` with JavaScript enabled. No packages or build step are required
 
 `js/menu-data.js` exposes `window.OrbitFood.dishes` and `.categories`. `js/menu.js` renders cards using DOM methods and textContent, handles events, and stores only favorite dish IDs under `orbitfood.favorites.v1`. No personal details are stored. Both scripts are deferred; load the data script first.
 
+## Chef's inspiration
+
+The recipe search uses `ApiClient.get()` from `js/api-client.js` to send requests, enforce a timeout and parse JSON. The catalog uses `Dish` objects from `js/menu-data.js` to format prices and match search terms. Menu favorites use `StorageService` from `js/storage-service.js` to read and write JSON under the existing favorites key. Malformed saved data starts with an empty list, and blocked storage leaves favorites available for the current visit.
+
+On the Menu page, select Ingredient and search for `chicken breast`, or select Cuisine and search for `Italian`. The section builds recipe cards from the [TheMealDB API](https://www.themealdb.com/api.php) response. Select a recipe name to open its full instructions on TheMealDB.
+
+Search for `zzzzinvalid` to check the empty state. Disconnect before searching to check the error message, then reconnect and select **Try again** to repeat the same search.
+
+## Dish details and viewing history
+
+Open a dish name from the menu or go directly to `dish.html?id=fish`. The page reads details from the shared catalog and links to the matching order item. The old `dish.html` link still opens the risotto. An unknown ID displays a link back to the menu.
+
+Open all four dishes, then revisit one of them. On the home page, Recently viewed shows up to four unique dishes, with the most recent first. Reload to check that the history persists, then select **Clear history** to remove it. History and menu favorites use separate storage keys.
+
 ## How to test forms and jQuery
+
 
 1. Open Reserve and submit with empty fields. Check that individual errors appear and keyboard focus moves to the date field. Try a date in the past, a time that already passed today in Astana and a name containing only spaces.
 2. Enter a future date, a listed time, 2 guests and a sample name. Submit again and check the demo success message. Change a field and check that the old success message clears.
