@@ -48,7 +48,7 @@ function scheduleErrors(date, time) {
     return { dateError, timeError };
 }
 
-function setupValidation(form, checkFields) {
+function setupValidation(form, checkFields, onValid) {
     const success = form.querySelector(".form-success");
     const alert = form.querySelector(".form-alert");
     let submitted = false;
@@ -80,6 +80,7 @@ function setupValidation(form, checkFields) {
             firstInvalid.field.focus();
             return;
         }
+        if (onValid && onValid() === false) return;
         success.hidden = false;
         success.focus();
     });

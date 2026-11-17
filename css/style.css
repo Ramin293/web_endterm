@@ -834,3 +834,7 @@ textarea.form-control {
 .order-item button {
     margin-left: auto;
 }
+
+.pickup-panel {
+    max-width: 42rem;
+}

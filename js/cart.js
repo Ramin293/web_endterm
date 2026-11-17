@@ -22,6 +22,11 @@ class PickupCart {
         this.storage.write(this.key, this.quantities);
     }
 
+    clear() {
+        this.quantities = {};
+        this.storage.write(this.key, this.quantities);
+    }
+
     items() {
         return this.dishes
             .filter(dish => this.quantities[dish.id])

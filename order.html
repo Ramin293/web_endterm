@@ -46,10 +46,14 @@
             <div class="page-content">
                 <noscript><p>Turn on JavaScript to use the pickup cart.</p></noscript>
                 <form id="order-form">
-                    <div class="row g-4">
+                    <p class="small fw-bold" id="pickup-step"></p>
+                    <p class="alert alert-success form-success" tabindex="-1" role="status" hidden></p>
+                    <p class="small" id="order-storage-warning" role="status" hidden>Browser storage is unavailable. Changes may be lost on reload.</p>
+                    <p class="visually-hidden form-alert" role="alert"></p>
+                    <div class="row g-4" id="cart-step">
                         <div class="col-lg-8">
                             <fieldset class="order-list">
-                                <legend>Choose dishes</legend>
+                                <legend id="cart-heading" tabindex="-1">Choose dishes</legend>
                                 <p>Add dishes to your cart and choose how many portions you want.</p>
                                 <div class="order-item" id="toast-choice">
                                     <img src="images/toast.jpg" alt="Toast topped with golden mushrooms and herbs" width="100" height="100">
@@ -98,34 +102,50 @@
                                 <p class="fw-bold" id="order-total">Total: $0</p>
                                 <p class="visually-hidden" id="cart-status" role="status"></p>
                                 <p class="text-danger small" id="cart-error" hidden></p>
-                                <p class="small" id="order-storage-warning" role="status" hidden>Browser storage is unavailable. Changes may be lost on reload.</p>
-                                <div class="mb-3">
-                                    <label class="form-label" for="pickup-date">Pickup date</label>
-                                    <input class="form-control" type="date" id="pickup-date" required aria-describedby="pickup-date-error">
-                                    <p class="text-danger small mt-1 mb-0" id="pickup-date-error" hidden></p>
-                                </div>
-                                <div class="mb-3">
-                                    <label class="form-label" for="pickup">Pickup time in Astana</label>
-                                    <select class="form-select" id="pickup" required aria-describedby="pickup-error">
-                                        <option value="">Choose a time</option>
-                                        <option>12:00</option>
-                                        <option>13:30</option>
-                                        <option>15:00</option>
-                                        <option>17:00</option>
-                                        <option>18:30</option>
-                                        <option>20:00</option>
-                                        <option>21:30</option>
-                                    </select>
-                                    <p class="text-danger small mt-1 mb-0" id="pickup-error" hidden></p>
-                                </div>
-                                <p class="small-note mb-4">Prices are per portion. Pickup from OrbitFood, 14 Green Street.</p>
-                                <button class="btn btn-dark w-100" type="submit" disabled>Continue order &rarr;</button>
-                                <p class="visually-hidden form-alert" role="alert"></p>
-                                <p class="alert alert-success form-success mt-3 mb-0" tabindex="-1" hidden>Order details passed validation. This is a demo and no order was placed.</p>
-                                <p class="small-note">Student demo: no payment is taken and no real order is placed.</p>
+                                <button class="btn btn-dark w-100" type="submit" id="continue-order" disabled>Choose pickup time</button>
                             </div>
                         </aside>
                     </div>
+
+                    <section class="panel pickup-panel" id="schedule-step" hidden aria-labelledby="schedule-heading">
+                        <h2 id="schedule-heading" tabindex="-1">Pickup date and time</h2>
+                    <div class="mb-3">
+                        <label class="form-label" for="pickup-date">Pickup date</label>
+                        <input class="form-control" type="date" id="pickup-date" required aria-describedby="pickup-date-error">
+                        <p class="text-danger small mt-1 mb-0" id="pickup-date-error" hidden></p>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label" for="pickup">Pickup time in Astana</label>
+                        <select class="form-select" id="pickup" required aria-describedby="pickup-error">
+                            <option value="">Choose a time</option>
+                            <option>12:00</option>
+                            <option>13:30</option>
+                            <option>15:00</option>
+                            <option>17:00</option>
+                            <option>18:30</option>
+                            <option>20:00</option>
+                            <option>21:30</option>
+                        </select>
+                        <p class="text-danger small mt-1 mb-0" id="pickup-error" hidden></p>
+                    </div>
+                        <p class="small-note">Pickup from OrbitFood, 14 Green Street.</p>
+                        <div class="d-flex flex-wrap gap-2">
+                            <button class="btn btn-outline-dark" type="button" data-back>Back to cart</button>
+                            <button class="btn btn-dark" type="submit">Review order</button>
+                        </div>
+                    </section>
+
+                    <section class="panel pickup-panel" id="review-step" hidden aria-labelledby="review-heading">
+                        <h2 id="review-heading" tabindex="-1">Review your order</h2>
+                        <ul class="list-unstyled" id="pickup-review-items"></ul>
+                        <p id="pickup-review-time"></p>
+                        <p class="fw-bold" id="pickup-review-total"></p>
+                        <p class="small-note">Demo order only. No payment or real pickup.</p>
+                        <div class="d-flex flex-wrap gap-2">
+                            <button class="btn btn-outline-dark" type="button" data-back>Back to pickup time</button>
+                            <button class="btn btn-dark" type="submit">Save demo order</button>
+                        </div>
+                    </section>
                 </form>
             </div>
         </div>

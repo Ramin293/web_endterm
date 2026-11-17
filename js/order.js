@@ -9,7 +9,7 @@ const orderTotal = document.getElementById("order-total");
 const pickupDate = document.getElementById("pickup-date");
 const pickup = document.getElementById("pickup");
 const addButtons = orderForm.querySelectorAll("[data-add-dish]");
-const continueOrder = orderForm.querySelector('[type="submit"]');
+const continueOrder = document.getElementById("continue-order");
 
 const orderStorage = new StorageService(() => {
     document.getElementById("order-storage-warning").hidden = false;
@@ -88,15 +88,99 @@ for (const button of addButtons) {
     });
 }
 
+const ordersKey = "orbitfood.orders.v1";
+const savedOrders = orderStorage.read(ordersKey, []);
+const orders = Array.isArray(savedOrders) ? savedOrders.filter(isSavedOrder) : [];
+const steps = [
+    document.getElementById("cart-step"),
+    document.getElementById("schedule-step"),
+    document.getElementById("review-step")
+];
+const stepHeadings = ["cart-heading", "schedule-heading", "review-heading"];
+const stepNames = ["Cart", "Pickup time", "Review"];
+let step = 0;
+
+function isSavedOrder(order) {
+    return typeof order?.createdAt === "string"
+        && Number.isFinite(Date.parse(order.createdAt))
+        && Array.isArray(order.items)
+        && order.items.length > 0
+        && order.items.every(item => typeof item?.id === "string"
+            && typeof item.name === "string"
+            && Number.isFinite(item.price) && item.price >= 0
+            && Number.isInteger(item.quantity) && validPortions(item.quantity))
+        && Number.isFinite(order.total) && order.total >= 0;
+}
+
+function showOrderStep(nextStep, focus = true) {
+    step = nextStep;
+    steps.forEach((section, index) => {
+        section.hidden = index !== step;
+    });
+    document.getElementById("pickup-step").textContent = `Step ${step + 1} of 3 · ${stepNames[step]}`;
+    if (focus) document.getElementById(stepHeadings[step]).focus();
+}
+
+function pickupLabel() {
+    return `${pickupDate.value} at ${pickup.value} (Astana time)`;
+}
+
+function renderReview() {
+    const list = document.getElementById("pickup-review-items");
+    list.replaceChildren();
+    for (const item of cart.items()) {
+        const row = document.createElement("li");
+        row.textContent = `${item.quantity} × ${item.name} — $${item.price * item.quantity}`;
+        list.append(row);
+    }
+    document.getElementById("pickup-review-time").textContent = `Pickup: ${pickupLabel()}`;
+    document.getElementById("pickup-review-total").textContent = `Total: $${cart.total()}`;
+}
+
 pickupDate.min = astanaDateAndTime().date;
 pickupDate.value = pickupDate.min;
 
+for (const button of orderForm.querySelectorAll("[data-back]")) {
+    button.addEventListener("click", () => showOrderStep(step - 1));
+}
+
 setupValidation(orderForm, () => {
+    if (step === 0) return [];
     const { dateError, timeError } = scheduleErrors(pickupDate, pickup);
+    if (step === 2 && (dateError || timeError)) showOrderStep(1, false);
     return [
         [[pickupDate], "pickup-date-error", dateError],
         [[pickup], "pickup-error", timeError]
     ];
+}, () => {
+    if (step === 0) {
+        if (cart.items().length > 0) showOrderStep(1);
+        return false;
+    }
+
+    if (step === 1) {
+        renderReview();
+        showOrderStep(2);
+        return false;
+    }
+
+    const order = {
+        createdAt: new Date().toISOString(),
+        date: pickupDate.value,
+        time: pickup.value,
+        total: cart.total(),
+        items: cart.items()
+    };
+    orders.push(order);
+    orderStorage.write(ordersKey, orders);
+    cart.clear();
+    renderCart();
+    orderForm.querySelector(".form-success").textContent =
+        `Demo order recorded · ${pickupLabel()} · $${order.total}`;
+    pickupDate.value = astanaDateAndTime().date;
+    pickup.value = "";
+    showOrderStep(0, false);
 });
 
 renderCart();
+showOrderStep(0, false);
