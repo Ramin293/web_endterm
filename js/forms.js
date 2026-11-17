@@ -1,7 +1,6 @@
 "use strict";
 
 const reservationForm = document.querySelector("#reservation-form");
-const orderForm = document.querySelector("#order-form");
 
 function astanaDateAndTime() {
     //тут берем дату и время ресторана чтобы проверка не зависела от часового пояса гостя
@@ -112,42 +111,4 @@ if (reservationForm) {
             [[note], "note-error", note.value.length <= 300 ? "" : "Keep the note to 300 characters or fewer."]
         ];
     });
-}
-
-if (orderForm) {
-    const radios = orderForm.querySelectorAll('input[name="dish"]');
-    const quantity = document.getElementById("quantity");
-    const pickupDate = document.getElementById("pickup-date");
-    const pickup = document.getElementById("pickup");
-    const total = document.getElementById("order-total");
-    pickupDate.min = astanaDateAndTime().date;
-    if (!pickupDate.value) pickupDate.value = pickupDate.min;
-
-    function selectedDish() {
-        const selected = orderForm.querySelector('input[name="dish"]:checked');
-        if (!selected) return null;
-        return window.OrbitFood.dishes.find(dish => dish.id === selected.value);
-    }
-
-    function updateTotal() {
-        //тут берем цену из общего массива блюд
-        const dish = selectedDish();
-        total.textContent = dish && validPortions(quantity.value)
-            ? `Estimated total: $${dish.price * Number(quantity.value)}`
-            : "Select a dish and 1 to 6 portions to see the total.";
-    }
-
-    setupValidation(orderForm, function () {
-        const { dateError, timeError } = scheduleErrors(pickupDate, pickup);
-        return [
-            [radios, "dish-error", selectedDish() ? "" : "Select a dish from the list."],
-            [[quantity], "quantity-error", validPortions(quantity.value) ? "" : "Enter a whole number from 1 to 6."],
-            [[pickupDate], "pickup-date-error", dateError],
-            [[pickup], "pickup-error", timeError]
-        ];
-    });
-
-    orderForm.addEventListener("input", updateTotal);
-    total.hidden = false;
-    updateTotal();
 }

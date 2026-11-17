@@ -11,6 +11,8 @@
     <link rel="stylesheet" href="css/style.css">
     <script src="js/menu-data.js" defer></script>
     <script src="js/forms.js" defer></script>
+    <script src="js/cart.js" defer></script>
+    <script src="js/order.js" defer></script>
 </head>
 <body>
     <a class="skip-link" href="#main">Skip to content</a>
@@ -42,61 +44,61 @@
                 <p>Take a little bit of OrbitFood home with you.</p>
             </header>
             <div class="page-content">
-                <form id="order-form" action="order-result.html#demo-finished" method="get">
+                <noscript><p>Turn on JavaScript to use the pickup cart.</p></noscript>
+                <form id="order-form">
                     <div class="row g-4">
                         <div class="col-lg-8">
                             <fieldset class="order-list">
-                                <legend>Choose your dish</legend>
-                                <p>Select one dish, then choose how many portions you would like.</p>
+                                <legend>Choose dishes</legend>
+                                <p>Add dishes to your cart and choose how many portions you want.</p>
                                 <div class="order-item" id="toast-choice">
                                     <img src="images/toast.jpg" alt="Toast topped with golden mushrooms and herbs" width="100" height="100">
-                                    <input type="radio" id="choose-toast" name="dish" value="toast" required aria-describedby="dish-error">
-                                    <label for="choose-toast">
-                                        <strong>Wild mushroom toast</strong>
+                                    <div class="order-dish">
+                                        <strong id="toast-name">Wild mushroom toast</strong>
                                         <small>Sourdough, thyme and a generous serving of mushrooms.</small>
                                         <span class="price">$14</span>
-                                    </label>
+                                    </div>
+                                    <button class="btn btn-outline-dark" type="button" data-add-dish="toast" aria-describedby="toast-name" disabled>Add</button>
                                 </div>
                                 <div class="order-item" id="risotto-choice">
                                     <img src="images/risotto.jpg" alt="Creamy risotto served on a white plate" width="100" height="100">
-                                    <input type="radio" id="choose-risotto" name="dish" value="risotto" required aria-describedby="dish-error">
-                                    <label for="choose-risotto">
-                                        <strong>Roasted pumpkin risotto</strong>
+                                    <div class="order-dish">
+                                        <strong id="risotto-name">Roasted pumpkin risotto</strong>
                                         <small>Creamy arborio rice, roasted pumpkin, sage and parmesan.</small>
                                         <span class="price">$18</span>
-                                    </label>
+                                    </div>
+                                    <button class="btn btn-outline-dark" type="button" data-add-dish="risotto" aria-describedby="risotto-name" disabled>Add</button>
                                 </div>
                                 <div class="order-item" id="fish-choice">
                                     <img src="images/fish.jpg" alt="Sea bass with roasted vegetables on a grey plate" width="100" height="100">
-                                    <input type="radio" id="choose-fish" name="dish" value="fish" required aria-describedby="dish-error">
-                                    <label for="choose-fish">
-                                        <strong>Charred sea bass</strong>
+                                    <div class="order-dish">
+                                        <strong id="fish-name">Charred sea bass</strong>
                                         <small>Roasted vegetables, fresh herbs and a crisp golden skin.</small>
                                         <span class="price">$26</span>
-                                    </label>
+                                    </div>
+                                    <button class="btn btn-outline-dark" type="button" data-add-dish="fish" aria-describedby="fish-name" disabled>Add</button>
                                 </div>
                                 <div class="order-item" id="tart-choice">
                                     <img src="images/tart.jpg" alt="Fruit tart served with sliced pear and fresh mint" width="100" height="100">
-                                    <input type="radio" id="choose-tart" name="dish" value="tart" required aria-describedby="dish-error">
-                                    <label for="choose-tart">
-                                        <strong>Pear &amp; almond tart</strong>
+                                    <div class="order-dish">
+                                        <strong id="tart-name">Pear &amp; almond tart</strong>
                                         <small>Pear, almond cream and a buttery pastry crust.</small>
                                         <span class="price">$10</span>
-                                    </label>
+                                    </div>
+                                    <button class="btn btn-outline-dark" type="button" data-add-dish="tart" aria-describedby="tart-name" disabled>Add</button>
                                 </div>
-                                <p class="text-danger small mt-2 mb-0" id="dish-error" hidden></p>
                             </fieldset>
                             <a class="text-link d-inline-block mt-3" href="menu.html">Explore the full menu &rarr;</a>
                         </div>
                         <aside class="col-lg-4">
                             <div class="panel side-panel">
-                                <h2>Your order</h2>
-                                <p>One dish, freshly prepared for pickup.</p>
-                                <div class="mb-3">
-                                    <label class="form-label" for="quantity">Portions</label>
-                                    <input class="form-control" type="number" id="quantity" min="1" max="6" value="1" required aria-describedby="quantity-error">
-                                    <p class="text-danger small mt-1 mb-0" id="quantity-error" hidden></p>
-                                </div>
+                                <h2>Your cart</h2>
+                                <p id="cart-empty">Add a dish to start your order.</p>
+                                <ul class="list-unstyled mb-3" id="cart-items"></ul>
+                                <p class="fw-bold" id="order-total">Total: $0</p>
+                                <p class="visually-hidden" id="cart-status" role="status"></p>
+                                <p class="text-danger small" id="cart-error" hidden></p>
+                                <p class="small" id="order-storage-warning" role="status" hidden>Browser storage is unavailable. Changes may be lost on reload.</p>
                                 <div class="mb-3">
                                     <label class="form-label" for="pickup-date">Pickup date</label>
                                     <input class="form-control" type="date" id="pickup-date" required aria-describedby="pickup-date-error">
@@ -116,9 +118,8 @@
                                     </select>
                                     <p class="text-danger small mt-1 mb-0" id="pickup-error" hidden></p>
                                 </div>
-                                <p class="fw-bold" id="order-total" role="status" hidden></p>
                                 <p class="small-note mb-4">Prices are per portion. Pickup from OrbitFood, 14 Green Street.</p>
-                                <button class="btn btn-dark w-100" type="submit">Continue order &rarr;</button>
+                                <button class="btn btn-dark w-100" type="submit" disabled>Continue order &rarr;</button>
                                 <p class="visually-hidden form-alert" role="alert"></p>
                                 <p class="alert alert-success form-success mt-3 mb-0" tabindex="-1" hidden>Order details passed validation. This is a demo and no order was placed.</p>
                                 <p class="small-note">Student demo: no payment is taken and no real order is placed.</p>

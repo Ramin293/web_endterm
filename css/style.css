@@ -820,3 +820,17 @@ textarea.form-control {
     .menu-tools { padding: 20px; }
     .menu-actions { align-items: stretch; flex-direction: column; }
 }
+
+.order-dish {
+    flex: 1 1 12rem;
+    min-width: 0;
+}
+
+.order-item {
+    flex-wrap: wrap;
+    scroll-margin-top: 1rem;
+}
+
+.order-item button {
+    margin-left: auto;
+}
