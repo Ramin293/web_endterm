@@ -261,6 +261,10 @@ p {
     gap: 24px;
 }
 
+.recipe-instructions {
+    white-space: pre-line;
+}
+
 .food-card {
     overflow: hidden;
     border: 1px solid #dedfd5;

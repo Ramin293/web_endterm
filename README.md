@@ -91,7 +91,11 @@ Open `menu.html` with JavaScript enabled. No packages or build step are required
 
 The recipe search uses `ApiClient.get()` from `js/api-client.js` to send requests, enforce a timeout and parse JSON. The catalog uses `Dish` objects from `js/menu-data.js` to format prices and match search terms. Menu favorites use `StorageService` from `js/storage-service.js` to read and write JSON under the existing favorites key. Malformed saved data starts with an empty list, and blocked storage leaves favorites available for the current visit.
 
-On the Menu page, select Ingredient and search for `chicken breast`, or select Cuisine and search for `Italian`. The section builds recipe cards from the [TheMealDB API](https://www.themealdb.com/api.php) response. Select a recipe name to open its full instructions on TheMealDB.
+On the Menu page, select Ingredient and search for `chicken breast`, or select Cuisine and search for `Italian`. The section builds recipe cards from the [TheMealDB API](https://www.themealdb.com/api.php) response. Use **Back** and **Next** to browse six recipes per page.
+
+Select a recipe name to fetch its ingredients, quantities, instructions and video link when available. Details open in a Bootstrap modal. Press Escape or use the close button to return to the recipe card.
+
+Toggle **Save recipe** on a card, then check **Show saved recipes** to see your collection, including after a reload. The same button removes a saved recipe. Recipe favorites use the `orbitfood.recipeFavorites.v1` storage key.
 
 Search for `zzzzinvalid` to check the empty state. Disconnect before searching to check the error message, then reconnect and select **Try again** to repeat the same search.
 
