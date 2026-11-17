@@ -73,7 +73,7 @@ document.addEventListener("DOMContentLoaded", () => {
             heading.className = "h5";
             const open = document.createElement("button");
             open.type = "button";
-            open.className = "btn btn-link link-dark text-start p-0 fw-bold";
+            open.className = "btn btn-link recipe-open text-start p-0 fw-bold";
             open.textContent = meal.strMeal;
             open.setAttribute("aria-haspopup", "dialog");
             open.addEventListener("click", () => showRecipe(meal, open));

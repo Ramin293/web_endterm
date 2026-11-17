@@ -105,6 +105,10 @@ Open a dish name from the menu or go directly to `dish.html?id=fish`. The page r
 
 Open all four dishes, then revisit one of them. On the home page, Recently viewed shows up to four unique dishes, with the most recent first. Reload to check that the history persists, then select **Clear history** to remove it. History and menu favorites use separate storage keys.
 
+## Display preferences
+
+Use **Dark mode**, **A−** and **A+** in any page header to change the theme or adjust text size from 87.5% to 125%. The settings are saved in the browser and applied when opening another page. Use Tab to reach the controls and Enter or Space to activate them. If browser storage is unavailable, the controls still work on the current page.
+
 ## How to test forms and jQuery
 
 
