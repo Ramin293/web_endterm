@@ -24,8 +24,10 @@ class StorageService {
     write(key, value) {
         try {
             localStorage.setItem(key, JSON.stringify(value));
+            return true;
         } catch {
             this.onUnavailable();
+            return false;
         }
     }
 

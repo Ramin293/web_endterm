@@ -1,6 +1,6 @@
 # OrbitFood
 
-OrbitFood is a restaurant website for Web Technologies I, continued from midterm to endterm. The idea is to help visitors browse a small seasonal menu, read about a dish, plan a visit and try a pickup order.
+OrbitFood is a restaurant website for Web Technologies I, continued from midterm and endterm into the final project. The idea is to help visitors browse a small seasonal menu, read about a dish, plan a visit and try a pickup order.
 
 [Open the website](https://ramin293.github.io/web_endterm/)
 
@@ -11,15 +11,15 @@ The layout is based on our [Figma wireframes](https://www.figma.com/design/33Djx
 - Home: introduction, featured dishes and up to four recently viewed dishes.
 - Menu: starters, mains and desserts.
 - Dish details: name, price, ingredients and related dishes from the shared catalog.
-- Reservation: date, time, guest count and name.
+- Reservation: find a time for your group and manage demo bookings.
 - About: the restaurant story, opening hours, location and team.
-- Order: choose one dish, the number of portions and a pickup time.
+- Order: build a cart, schedule a pickup and see your demo order summary.
 
 There are also two informational pages for the reservation and order demos. The same navigation and footer are used throughout the site.
 
 ## How to open it
 
-Download the project and open `index.html` in a browser. No installation or build command is needed. Bootstrap, jQuery and the restaurant photographs are stored locally. Recipe search and the external Figma and map links need internet access. For reliable favorites storage across pages, use the published website or serve the project over local HTTP.
+Download the project and open `index.html` in a browser. No installation or build command is needed. Bootstrap, jQuery and the restaurant photographs are stored locally. Recipe search and the external Figma and map links need internet access. Use the published site or serve the project over local HTTP to test saved data across pages.
 
 ## What we used
 
@@ -39,11 +39,12 @@ All custom styles are in `css/style.css`. Vendor licences are in `bootstrap/LICE
 
 ## About the forms
 
-This is a fictional restaurant and a static student project. With JavaScript enabled, each form validates on the same page and displays a demo success message. It focuses the first invalid field and updates feedback as values are corrected. Without JavaScript, native HTML validation leads to an informational page.
+Use sample details when testing. Orders and bookings are demos saved in this browser. The site does not send them to a restaurant or take payment. Both forms use Astana time and reject past slots. Prices are in USD.
 
-Both forms use Astana date and time and reject past slots. The order form estimates the cost of one dish with 1 to 6 portions using prices from the shared menu array.
+## Final features and team
 
-Use sample details when testing. The forms do not send bookings, accept payments or save orders. The address is fictional, and the map link opens Astana. Prices are shown in USD to match the wireframes.
+- [Ramin293](https://github.com/Ramin293): recipe search with TheMealDB, recipe details and saved recipes, pagination, dish details and viewing history, dark mode and text size.
+- [Arnur Kozhabergen](https://github.com/arnur-kozhabergen): multi-dish cart, three-step pickup form, time slots by guest count, booking management and order summary.
 
 ## GitHub Pages
 
@@ -109,16 +110,16 @@ Open all four dishes, then revisit one of them. On the home page, Recently viewe
 
 Use **Dark mode**, **A−** and **A+** in any page header to change the theme or adjust text size from 87.5% to 125%. The settings are saved in the browser and applied when opening another page. Use Tab to reach the controls and Enter or Space to activate them. If browser storage is unavailable, the controls still work on the current page.
 
-## How to test forms and jQuery
+## How to test bookings and pickup
 
+1. On Reserve, try saving with empty fields. Then choose a future date and switch from 2 to 6 guests. The time list gets shorter. For today, times that have already passed in Astana are hidden.
+2. Save a booking with a sample name and reload. Open it in My bookings, change the date, time or guest count, then cancel it. The list keeps the change after a reload.
+3. On Order, add a $14 toast and two $18 risottos. The total is $50. Reload and check the cart. Remove the toast and check that the total drops to $36.
+4. Choose a pickup date and time. Go back to the cart and continue again to check that both values are kept. Review and save the demo order. The cart clears and the summary shows the new order.
+5. Try Today, Last 7 days and All time in the summary. The filters use the day the order was saved in Astana, rather than the pickup date. Popular dishes are ranked by portions.
+6. On About, open and close a FAQ answer. On Reserve, focus and leave the note field to try the jQuery hint.
 
-1. Open Reserve and submit with empty fields. Check that individual errors appear and keyboard focus moves to the date field. Try a date in the past, a time that already passed today in Astana and a name containing only spaces.
-2. Enter a future date, a listed time, 2 guests and a sample name. Submit again and check the demo success message. Change a field and check that the old success message clears.
-3. Open Order and try submitting without a dish or pickup slot. Select the $18 risotto and enter 2 portions. The total should be $36. Try 0, 7 or a fractional quantity, then restore a valid quantity and submit with a future pickup date and time.
-4. Open About. Click a FAQ question or use Enter to reveal its answer. Activate the same question again to close it. On Reserve, use Tab to focus the optional note and then move away. The example should fade in and out.
-5. Open both result pages directly. They should display information about the demos. Repeat the main interactions on a phone-width screen.
-
-`js/forms.js` uses native event listeners and `preventDefault()`. `js/enhancements.js` uses ID and class selectors, `closest()` and `find()`, and jQuery slide and fade effects.
+`js/forms.js` shares date and validation logic. `PickupCart` keeps dish quantities and totals in `js/cart.js`. `js/order.js` handles pickup and the summary. `js/reservation.js` handles time slots and bookings. Both pages reuse `StorageService` to store JSON. If storage is blocked, changes work on the current page and a warning appears.
 
 ## Repository migration
 

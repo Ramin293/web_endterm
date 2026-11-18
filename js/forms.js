@@ -1,6 +1,6 @@
 "use strict";
 
-function astanaDateAndTime() {
+function astanaDateAndTime(value = new Date()) {
     //тут берем дату и время ресторана чтобы проверка не зависела от часового пояса гостя
     const formatter = new Intl.DateTimeFormat("en-GB", {
         timeZone: "Asia/Almaty",
@@ -12,7 +12,7 @@ function astanaDateAndTime() {
         hourCycle: "h23"
     });
     const parts = {};
-    for (const part of formatter.formatToParts(new Date())) {
+    for (const part of formatter.formatToParts(value)) {
         parts[part.type] = part.value;
     }
     return {

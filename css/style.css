@@ -623,11 +623,6 @@ textarea.form-control {
     object-fit: cover;
 }
 
-.order-item label {
-    flex: 1;
-    cursor: pointer;
-}
-
 .order-item strong,
 .order-item small {
     display: block;
@@ -636,19 +631,6 @@ textarea.form-control {
 .order-item small {
     margin: 5px 0;
     color: var(--muted-ink);
-}
-
-.order-item input {
-    width: 22px;
-    height: 22px;
-    accent-color: var(--action-bg);
-    cursor: pointer;
-}
-
-.order-item input:checked + label strong {
-    color: var(--selected-ink);
-    text-decoration: underline;
-    text-underline-offset: 4px;
 }
 
 .result {

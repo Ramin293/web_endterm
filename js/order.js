@@ -172,8 +172,9 @@ setupValidation(orderForm, () => {
         items: cart.items()
     };
     orders.push(order);
-    orderStorage.write(ordersKey, orders);
-    cart.clear();
+    const saved = orderStorage.write(ordersKey, orders);
+    cart.clear(saved);
+    renderOrderStats();
     renderCart();
     orderForm.querySelector(".form-success").textContent =
         `Demo order recorded · ${pickupLabel()} · $${order.total}`;
@@ -184,3 +185,46 @@ setupValidation(orderForm, () => {
 
 renderCart();
 showOrderStep(0, false);
+
+const statsPeriod = document.getElementById("stats-period");
+
+function renderOrderStats() {
+    const today = astanaDateAndTime().date;
+    const weekStart = new Date(Date.parse(today) - 6 * 86400000).toISOString().slice(0, 10);
+    const filteredOrders = orders.filter(order => {
+        if (statsPeriod.value === "all") return true;
+        const orderDay = astanaDateAndTime(new Date(order.createdAt)).date;
+        const start = statsPeriod.value === "today" ? today : weekStart;
+        return orderDay >= start && orderDay <= today;
+    });
+
+    document.getElementById("stats-count").textContent = filteredOrders.length;
+    const total = filteredOrders.reduce((sum, order) => sum + order.total, 0);
+    document.getElementById("stats-total").textContent = `$${total}`;
+
+    const dishCounts = new Map();
+    for (const order of filteredOrders) {
+        for (const item of order.items) {
+            if (!dishCounts.has(item.id)) {
+                dishCounts.set(item.id, { name: item.name, quantity: 0 });
+            }
+            dishCounts.get(item.id).quantity += item.quantity;
+        }
+    }
+
+    const popular = Array.from(dishCounts.values())
+        .sort((a, b) => b.quantity - a.quantity || a.name.localeCompare(b.name))
+        .slice(0, 3);
+    const list = document.getElementById("stats-popular");
+    list.replaceChildren();
+    for (const dish of popular) {
+        const row = document.createElement("li");
+        row.textContent = `${dish.name} · ${dish.quantity} ${dish.quantity === 1 ? "portion" : "portions"}`;
+        list.append(row);
+    }
+    document.getElementById("stats-empty").hidden = popular.length > 0;
+}
+
+statsPeriod.addEventListener("change", renderOrderStats);
+renderOrderStats();
+document.getElementById("order-stats").hidden = false;

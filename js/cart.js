@@ -22,9 +22,9 @@ class PickupCart {
         this.storage.write(this.key, this.quantities);
     }
 
-    clear() {
+    clear(persist) {
         this.quantities = {};
-        this.storage.write(this.key, this.quantities);
+        if (persist) this.storage.write(this.key, this.quantities);
     }
 
     items() {

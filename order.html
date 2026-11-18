@@ -109,25 +109,25 @@
 
                     <section class="panel pickup-panel" id="schedule-step" hidden aria-labelledby="schedule-heading">
                         <h2 id="schedule-heading" tabindex="-1">Pickup date and time</h2>
-                    <div class="mb-3">
-                        <label class="form-label" for="pickup-date">Pickup date</label>
-                        <input class="form-control" type="date" id="pickup-date" required aria-describedby="pickup-date-error">
-                        <p class="text-danger small mt-1 mb-0" id="pickup-date-error" hidden></p>
-                    </div>
-                    <div class="mb-3">
-                        <label class="form-label" for="pickup">Pickup time in Astana</label>
-                        <select class="form-select" id="pickup" required aria-describedby="pickup-error">
-                            <option value="">Choose a time</option>
-                            <option>12:00</option>
-                            <option>13:30</option>
-                            <option>15:00</option>
-                            <option>17:00</option>
-                            <option>18:30</option>
-                            <option>20:00</option>
-                            <option>21:30</option>
-                        </select>
-                        <p class="text-danger small mt-1 mb-0" id="pickup-error" hidden></p>
-                    </div>
+                        <div class="mb-3">
+                            <label class="form-label" for="pickup-date">Pickup date</label>
+                            <input class="form-control" type="date" id="pickup-date" required aria-describedby="pickup-date-error">
+                            <p class="text-danger small mt-1 mb-0" id="pickup-date-error" hidden></p>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label" for="pickup">Pickup time in Astana</label>
+                            <select class="form-select" id="pickup" required aria-describedby="pickup-error">
+                                <option value="">Choose a time</option>
+                                <option>12:00</option>
+                                <option>13:30</option>
+                                <option>15:00</option>
+                                <option>17:00</option>
+                                <option>18:30</option>
+                                <option>20:00</option>
+                                <option>21:30</option>
+                            </select>
+                            <p class="text-danger small mt-1 mb-0" id="pickup-error" hidden></p>
+                        </div>
                         <p class="small-note">Pickup from OrbitFood, 14 Green Street.</p>
                         <div class="d-flex flex-wrap gap-2">
                             <button class="btn btn-outline-dark" type="button" data-back>Back to cart</button>
@@ -147,6 +147,27 @@
                         </div>
                     </section>
                 </form>
+                <section class="panel mt-4 pickup-panel" id="order-stats" hidden aria-labelledby="stats-heading">
+                    <h2 id="stats-heading">Demo order summary</h2>
+                    <p>Based on orders recorded in this browser.</p>
+                    <label class="form-label" for="stats-period">Order period</label>
+                    <select class="form-select w-auto mb-3" id="stats-period">
+                        <option value="today">Today</option>
+                        <option value="week">Last 7 days</option>
+                        <option value="all" selected>All time</option>
+                    </select>
+                    <div aria-live="polite">
+                        <dl class="row mb-2">
+                            <dt class="col-sm-6">Orders</dt>
+                            <dd class="col-sm-6" id="stats-count"></dd>
+                            <dt class="col-sm-6">Total value</dt>
+                            <dd class="col-sm-6" id="stats-total"></dd>
+                        </dl>
+                        <h3 class="h5">Most ordered dishes</h3>
+                        <p id="stats-empty">No demo orders for this period.</p>
+                        <ol class="mb-0" id="stats-popular"></ol>
+                    </div>
+                </section>
             </div>
         </div>
     </main>
