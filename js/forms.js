@@ -1,7 +1,5 @@
 "use strict";
 
-const reservationForm = document.querySelector("#reservation-form");
-
 function astanaDateAndTime() {
     //тут берем дату и время ресторана чтобы проверка не зависела от часового пояса гостя
     const formatter = new Intl.DateTimeFormat("en-GB", {
@@ -89,27 +87,5 @@ function setupValidation(form, checkFields, onValid) {
         success.hidden = true;
         alert.textContent = "";
         if (submitted) validate();
-    });
-}
-
-if (reservationForm) {
-    const date = document.getElementById("date");
-    const time = document.getElementById("time");
-    const guests = document.getElementById("guests");
-    const name = document.getElementById("name");
-    const note = document.getElementById("note");
-    date.min = astanaDateAndTime().date;
-
-    setupValidation(reservationForm, function () {
-        const { dateError, timeError } = scheduleErrors(date, time);
-        const nameLength = name.value.trim().length;
-
-        return [
-            [[date], "date-error", dateError],
-            [[time], "time-error", timeError],
-            [[guests], "guests-error", validPortions(guests.value) ? "" : "Choose 1 to 6 guests."],
-            [[name], "name-error", nameLength >= 2 && nameLength <= 60 ? "" : "Enter a name with 2 to 60 characters."],
-            [[note], "note-error", note.value.length <= 300 ? "" : "Keep the note to 300 characters or fewer."]
-        ];
     });
 }

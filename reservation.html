@@ -10,6 +10,7 @@
     <link rel="stylesheet" href="bootstrap/bootstrap.css">
     <link rel="stylesheet" href="css/style.css">
     <script src="js/forms.js" defer></script>
+    <script src="js/reservation.js" defer></script>
     <script src="jquery/jquery-3.7.1.min.js" defer></script>
     <script src="js/enhancements.js" defer></script>
 </head>
@@ -55,21 +56,6 @@
                                     <p class="text-danger small mt-1 mb-0" id="date-error" hidden></p>
                                 </div>
                                 <div class="col-md-6">
-                                    <label class="form-label" for="time">Time in Astana</label>
-                                    <select class="form-select" id="time" required aria-describedby="time-error">
-                                        <option value="">Choose a time</option>
-                                        <option>11:30</option>
-                                        <option>13:00</option>
-                                        <option>14:30</option>
-                                        <option>16:00</option>
-                                        <option>17:30</option>
-                                        <option>19:00</option>
-                                        <option>20:30</option>
-                                        <option>21:30</option>
-                                    </select>
-                                    <p class="text-danger small mt-1 mb-0" id="time-error" hidden></p>
-                                </div>
-                                <div class="col-md-6">
                                     <label class="form-label" for="guests">Guests</label>
                                     <select class="form-select" id="guests" required aria-describedby="guests-error">
                                         <option value="">Number of guests</option>
@@ -81,6 +67,22 @@
                                         <option value="6">6 guests</option>
                                     </select>
                                     <p class="text-danger small mt-1 mb-0" id="guests-error" hidden></p>
+                                </div>
+                                <div class="col-md-6">
+                                    <label class="form-label" for="time">Time in Astana</label>
+                                    <select class="form-select" id="time" required aria-describedby="slot-hint time-error">
+                                        <option value="">Choose a time</option>
+                                        <option data-capacity="6">11:30</option>
+                                        <option data-capacity="4">13:00</option>
+                                        <option data-capacity="6">14:30</option>
+                                        <option data-capacity="6">16:00</option>
+                                        <option data-capacity="4">17:30</option>
+                                        <option data-capacity="4">19:00</option>
+                                        <option data-capacity="6">20:30</option>
+                                        <option data-capacity="4">21:30</option>
+                                    </select>
+                                    <p class="small mb-0 mt-1" id="slot-hint" role="status"></p>
+                                    <p class="text-danger small mt-1 mb-0" id="time-error" hidden></p>
                                 </div>
                                 <div class="col-md-6">
                                     <label class="form-label" for="name">Name</label>
@@ -110,7 +112,7 @@
                         <h3>A little extra time</h3>
                         <p>Tables are held for 15 minutes. Let the team know if you are running late.</p>
                         <h3>Coming as a group?</h3>
-                        <p>The form is for groups of up to 6. For larger gatherings, speak to our team.</p>
+                        <p>Some time slots fit up to 6 guests. Choose your group size to see which times fit.</p>
                         <h3>Dietary needs</h3>
                         <p>Add a note about allergies or preferences so the team knows what to discuss with you.</p>
                         <a class="btn btn-outline-dark w-100 mt-3" href="about.html#location">Location &amp; hours</a>
