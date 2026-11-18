@@ -52,9 +52,10 @@ function setupValidation(form, checkFields, onValid) {
     let submitted = false;
     form.noValidate = true;
 
-    function validate() {
+    function validate(showErrors = true) {
         let firstInvalid = null;
-        for (const [fields, errorId, message] of checkFields()) {
+        for (const [fields, errorId, error] of checkFields()) {
+            const message = showErrors ? error : "";
             const feedback = document.getElementById(errorId);
             feedback.textContent = message;
             feedback.hidden = !message;
@@ -88,4 +89,11 @@ function setupValidation(form, checkFields, onValid) {
         alert.textContent = "";
         if (submitted) validate();
     });
+
+    return function clearValidation() {
+        submitted = false;
+        success.hidden = true;
+        alert.textContent = "";
+        validate(false);
+    };
 }

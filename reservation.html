@@ -45,8 +45,8 @@
             </header>
             <div class="page-content row g-4">
                 <div class="col-lg-8">
-                    <section class="panel">
-                        <h2>Your reservation</h2>
+                    <section class="panel h-auto">
+                        <h2 id="booking-form-title" tabindex="-1">Your reservation</h2>
                         <p class="mb-4">All fields are required, except the note.</p>
                         <form id="reservation-form" action="reservation-result.html#demo-finished" method="get">
                             <div class="row g-3">
@@ -96,11 +96,22 @@
                                     <p class="text-danger small mt-1 mb-0" id="note-error" hidden></p>
                                 </div>
                             </div>
-                            <button class="btn btn-dark w-100 mt-4" type="submit">Continue reservation &rarr;</button>
+                            <div class="d-flex flex-wrap gap-2 mt-4">
+                                <button class="btn btn-dark flex-grow-1" type="submit" id="save-booking">Save demo booking</button>
+                                <button class="btn btn-outline-dark" type="button" id="stop-editing" hidden>Discard changes</button>
+                            </div>
                             <p class="visually-hidden form-alert" role="alert"></p>
-                            <p class="alert alert-success form-success mt-3 mb-0" tabindex="-1" hidden>Reservation details passed validation. This is a demo and no table was booked.</p>
-                            <p class="small-note">Student demo: try the form with sample details. This does not reserve a real table.</p>
+                            <p class="alert alert-success form-success mt-3 mb-0" tabindex="-1" role="status" hidden></p>
+                            <p class="small-note">Demo only. Use sample details. Bookings stay in this browser.</p>
                         </form>
+                    </section>
+
+                    <section class="panel h-auto mt-4" aria-labelledby="bookings-heading">
+                        <h2 id="bookings-heading" tabindex="-1">My bookings</h2>
+                        <p class="small" id="booking-storage-warning" role="status" hidden>Browser storage is unavailable. Changes may be lost on reload.</p>
+                        <p id="bookings-empty">No demo bookings yet.</p>
+                        <p class="visually-hidden" id="bookings-status" role="status"></p>
+                        <div id="booking-list"></div>
                     </section>
                 </div>
                 <aside class="col-lg-4">
